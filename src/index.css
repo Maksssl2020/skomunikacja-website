@@ -1,0 +1,14 @@
+@import "tailwindcss";
+@theme {
+    --font-display: "Lato", sans-serif;
+
+    --color-black-100: #111111;
+    --color-gray-100: #767676;
+    --color-blue-100: #1559CB;
+    --color-blue-200: #3382FF;
+}
+
+body, #root {
+    min-height: 100vh;
+    margin: 0;
+}
