@@ -1,4 +1,3 @@
-import React from "react";
 import HomeIcon from "../../icons/HomeIcon.tsx";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";

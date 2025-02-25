@@ -1,4 +1,3 @@
-import React from "react";
 import { IconProps } from "../types/types.ts";
 
 const LocationIcon = ({ className }: IconProps) => {

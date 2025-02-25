@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Page from "../animations/Page.tsx";
 import Modal from "../components/modal/Modal.tsx";
 import { AnimatePresence } from "framer-motion";

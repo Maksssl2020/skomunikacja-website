@@ -1,4 +1,3 @@
-import React from "react";
 import Page from "../animations/Page.tsx";
 import FormInput from "../components/input/FormInput.tsx";
 import { motion } from "framer-motion";
@@ -16,12 +15,12 @@ const Contact = () => {
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(contactFormValidator),
   });
 
+  // @ts-ignore
   const onSubmit = (data) => {
     console.log(data);
   };
