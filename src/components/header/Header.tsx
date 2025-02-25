@@ -1,7 +1,7 @@
 import React from "react";
 import HomeIcon from "../../icons/HomeIcon.tsx";
 import { useNavigate } from "react-router-dom";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -45,35 +45,39 @@ const Header = () => {
   return (
     <div
       className={
-        "relative flex h-[75px] w-full items-center justify-center gap-8 p-2 text-white"
+        "bg-black-200 relative flex h-[100px] w-full items-center justify-center gap-8 p-2 text-gray-200"
       }
     >
-      <motion.h1
+      <motion.div
+        whileHover={{ scale: 1.15 }}
         onClick={() => navigate("/")}
-        whileHover={{ color: "#3382FF" }}
-        className={"absolute left-2 cursor-pointer justify-self-start text-3xl"}
+        className={
+          "absolute left-4 flex size-[70px] cursor-pointer items-center justify-center rounded-full"
+        }
       >
-        S Komunikacja
-      </motion.h1>
+        <img
+          src={"/assets/company-logo-small.png"}
+          alt={""}
+          className={"size-[65px] justify-self-start"}
+        />
+      </motion.div>
+
       <nav className={"flex items-center gap-6 text-2xl font-light"}>
-        <AnimatePresence mode={"wait"}>
-          {headerNavigationData.map(
-            (data, index) =>
-              currentLocationPathname !== data.link && (
-                <motion.p
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  key={index}
-                  onClick={() => navigate(data.link)}
-                  whileHover={{ color: "#3382FF" }}
-                  className={"cursor-pointer"}
-                >
-                  {data.data}
-                </motion.p>
-              ),
-          )}
-        </AnimatePresence>
+        {headerNavigationData.map((data, index) => (
+          <motion.p
+            animate={
+              currentLocationPathname === data.link
+                ? { color: "#E6E6E6" }
+                : { color: "#7D7D7E" }
+            }
+            key={index}
+            onClick={() => navigate(data.link)}
+            whileHover={{ color: "#E6E6E6" }}
+            className={"cursor-pointer"}
+          >
+            {data.data}
+          </motion.p>
+        ))}
       </nav>
     </div>
   );

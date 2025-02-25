@@ -2,6 +2,12 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home.tsx";
 import AppLayout from "./layout/AppLayout.tsx";
 import Contact from "./pages/Contact.tsx";
+import AboutUs from "./pages/AboutUs.tsx";
+import News from "./pages/News.tsx";
+import Offer from "./pages/Offer.tsx";
+import Products from "./pages/Products.tsx";
+import TipsAndTricks from "./pages/TipsAndTricks.tsx";
+import Shop from "./pages/Shop.tsx";
 
 function App() {
   return (
@@ -9,6 +15,12 @@ function App() {
       <Routes>
         <Route element={<AppLayout />}>
           <Route path={"/"} element={<Home />} />
+          <Route path={"/news"} element={<News />} />
+          <Route path={"/about-us"} element={<AboutUs />} />
+          <Route path={"/offer"} element={<Offer />} />
+          <Route path={"/products"} element={<Products />} />
+          <Route path={"/tips-and-tricks"} element={<TipsAndTricks />} />
+          <Route path={"/shop"} element={<Shop />} />
           <Route path={"/contact"} element={<Contact />} />
         </Route>
       </Routes>

@@ -2,13 +2,24 @@
 @theme {
     --font-display: "Lato", sans-serif;
 
-    --color-black-100: #111111;
+    --color-black-100: #0A0A0C;
+    --color-black-200: #101012;
+    --color-black-300: #171719;
+    --color-black-400: rgba(85, 85, 85, 0.10);
     --color-gray-100: #767676;
+    --color-gray-200: rgba(230, 230, 230, 0.51);
+    --color-white-100: #E6E6E6;
     --color-blue-100: #1559CB;
     --color-blue-200: #3382FF;
+    --color-blue-300: #194BFD;
 }
 
 body, #root {
     min-height: 100vh;
     margin: 0;
 }
+
+.background-gradient {
+    background: linear-gradient(90deg, #194BFD, #AD13FB);
+}
+

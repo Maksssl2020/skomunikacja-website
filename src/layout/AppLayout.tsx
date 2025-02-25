@@ -7,7 +7,7 @@ const AppLayout = () => {
   return (
     <div className={"w-full"}>
       <Header />
-      <div className={"px-8 py-12"}>
+      <div className={"px-8 py-24"}>
         <Outlet />
       </div>
       <Footer />
