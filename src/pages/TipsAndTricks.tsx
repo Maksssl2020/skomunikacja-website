@@ -20,9 +20,20 @@ const tipsAndTricksData = [
   },
 ];
 
+type modalDataProp = {
+  title: string;
+  description: string;
+  imagesUrl: [];
+};
+
 const TipsAndTricks = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [modalData, setModalData] = useState({});
+  const [modalData, setModalData] = useState<modalDataProp>({
+    title: "",
+    description: "",
+    // @ts-ignore
+    imagesUrl: [""],
+  });
 
   return (
     <Page className={"relative flex justify-center"}>
@@ -30,6 +41,7 @@ const TipsAndTricks = () => {
         {tipsAndTricksData.map((data, index) => (
           <div
             onClick={() => {
+              // @ts-ignore
               setModalData(data);
               setIsModalOpen(true);
             }}
@@ -76,6 +88,7 @@ const TipsAndTricks = () => {
               />
               <img
                 className={"rounded-xl"}
+                // @ts-ignore
                 src={modalData.imagesUrl[0]}
                 alt={""}
               />
