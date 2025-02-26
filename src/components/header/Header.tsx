@@ -66,12 +66,12 @@ const Header = () => {
           <motion.p
             animate={
               currentLocationPathname === data.link
-                ? { color: "#E6E6E6" }
-                : { color: "#7D7D7E" }
+                ? { color: "#3382FF" }
+                : { color: "#E6E6E6" }
             }
             key={index}
             onClick={() => navigate(data.link)}
-            whileHover={{ color: "#E6E6E6" }}
+            whileHover={{ color: "#3382FF" }}
             className={"cursor-pointer"}
           >
             {data.data}

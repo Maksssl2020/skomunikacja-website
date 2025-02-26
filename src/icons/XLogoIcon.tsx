@@ -1,8 +1,10 @@
-import { IconProps } from "../types/types.ts";
+import { AnimatedIconProps } from "../types/types.ts";
+import { motion } from "framer-motion";
 
-const XLogoIcon = ({ className }: IconProps) => {
+const XLogoIcon = ({ className, isHover }: AnimatedIconProps) => {
   return (
-    <svg
+    <motion.svg
+      animate={isHover ? { fill: "#3382FF" } : { fill: "#E6E6E6" }}
       className={className}
       xmlns="http://www.w3.org/2000/svg"
       x="0px"
@@ -30,7 +32,7 @@ const XLogoIcon = ({ className }: IconProps) => {
           <path d="M2.86719,3l6.86914,9.81836l-7.00195,8.18164h2.64648l5.53906,-6.49023l4.54102,6.49023h5.91016l-7.19727,-10.30273l6.57031,-7.69727h-2.60547l-5.14258,6.00977l-4.19727,-6.00977z"></path>
         </g>
       </g>
-    </svg>
+    </motion.svg>
   );
 };
 

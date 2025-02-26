@@ -1,8 +1,10 @@
-import { IconProps } from "../types/types.ts";
+import { AnimatedIconProps } from "../types/types.ts";
+import { motion } from "framer-motion";
 
-const FacebookIcon = ({ className }: IconProps) => {
+const FacebookIcon = ({ className, isHover }: AnimatedIconProps) => {
   return (
-    <svg
+    <motion.svg
+      animate={isHover ? { fill: "#3382FF" } : { fill: "#E6E6E6" }}
       className={className}
       xmlns="http://www.w3.org/2000/svg"
       x="0px"
@@ -12,7 +14,7 @@ const FacebookIcon = ({ className }: IconProps) => {
       viewBox="0 0 24 24"
     >
       <path d="M17.525,9H14V7c0-1.032,0.084-1.682,1.563-1.682h1.868v-3.18C16.522,2.044,15.608,1.998,14.693,2 C11.98,2,10,3.657,10,6.699V9H7v4l3-0.001V22h4v-9.003l3.066-0.001L17.525,9z"></path>
-    </svg>
+    </motion.svg>
   );
 };
 

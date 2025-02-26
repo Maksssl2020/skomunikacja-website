@@ -1,10 +1,17 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Page from "../animations/Page.tsx";
 import Modal from "../components/modal/Modal.tsx";
 import { AnimatePresence } from "framer-motion";
 import CloseIcon from "./CloseIcon.tsx";
+import { motion } from "framer-motion";
 
-const tipsAndTricksData = [
+type TipsAndTricksProps = {
+  title: string;
+  description: string;
+  imagesUrl: string[];
+};
+
+const tipsAndTricksData: TipsAndTricksProps[] = [
   {
     title:
       "Transparentne łącze szeregowe w oparciu o dwa terminale LoRa F8L10T",
@@ -20,34 +27,35 @@ const tipsAndTricksData = [
   },
 ];
 
-type modalDataProp = {
-  title: string;
-  description: string;
-  imagesUrl: [];
-};
-
 const TipsAndTricks = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [modalData, setModalData] = useState<modalDataProp>({
+  const [modalData, setModalData] = useState<TipsAndTricksProps>({
     title: "",
     description: "",
-    // @ts-ignore
     imagesUrl: [""],
   });
+  const [textAreaHeight, setTextAreaHeight] = useState<number>(0);
+  const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
+
+  useEffect(() => {
+    if (textAreaRef.current) {
+      setTextAreaHeight(textAreaRef.current.scrollHeight);
+    }
+  }, [modalData, textAreaRef]);
 
   return (
     <Page className={"relative flex justify-center"}>
       <div className={"flex h-[750px] w-[1150px] flex-wrap gap-16"}>
         {tipsAndTricksData.map((data, index) => (
-          <div
+          <motion.div
+            whileHover={{ scale: 1.1 }}
             onClick={() => {
-              // @ts-ignore
               setModalData(data);
               setIsModalOpen(true);
             }}
             key={index}
             className={
-              "border-white-100 flex h-[300px] w-[325px] flex-col rounded-xl border-2"
+              "border-white-100 flex h-[300px] w-[325px] cursor-pointer flex-col rounded-xl border-2"
             }
           >
             <img
@@ -58,7 +66,7 @@ const TipsAndTricks = () => {
             <footer className={"text-white-100 mt-auto h-[75px] p-2"}>
               {data.title}
             </footer>
-          </div>
+          </motion.div>
         ))}
       </div>
 
@@ -70,25 +78,29 @@ const TipsAndTricks = () => {
                 "bg-black-200 relative flex h-auto min-h-[450px] w-[650px] flex-col gap-8 rounded-xl p-8"
               }
             >
-              <button
+              <motion.button
+                whileHover={{ color: "#3382FF", scale: 1.15 }}
                 onClick={() => setIsModalOpen(false)}
                 className={
-                  "absolute top-0 right-0 size-10 rounded-full text-white"
+                  "absolute top-0 right-0 size-12 cursor-pointer rounded-full text-white"
                 }
               >
-                <CloseIcon className={"size-8"} />
-              </button>
+                <CloseIcon className={"size-10"} />
+              </motion.button>
               <h2 className={"text-white-100 text-xl font-bold"}>
                 {modalData.title}
               </h2>
               <textarea
+                ref={textAreaRef}
                 readOnly={true}
-                className={"text-white-100 h-auto w-full outline-none"}
+                style={{ height: textAreaHeight }}
+                className={
+                  "text-white-100 h-auto w-full resize-none outline-none"
+                }
                 value={modalData.description}
               />
               <img
                 className={"rounded-xl"}
-                // @ts-ignore
                 src={modalData.imagesUrl[0]}
                 alt={""}
               />

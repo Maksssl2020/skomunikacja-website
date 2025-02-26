@@ -10,6 +10,30 @@ import AtSymbolIcon from "../icons/AtSymbolIcon.tsx";
 import FacebookIcon from "../icons/FacebookIcon.tsx";
 import XLogoIcon from "../icons/XLogoIcon.tsx";
 import LinkedinLogoIcon from "../icons/LinkedinLogoIcon.tsx";
+import AnimatedButtonWithIcon from "../components/button/AnimatedButtonWithIcon.tsx";
+import * as React from "react";
+import { AnimatedIconProps } from "../types/types.ts";
+import AnimatedAElement from "../components/a/AnimatedAElement.tsx";
+
+type SocialMediaIconData = {
+  link: string;
+  icon: React.ElementType<AnimatedIconProps>;
+};
+
+const socialMediaIconsData: SocialMediaIconData[] = [
+  {
+    link: "https://www.facebook.com/bpl.informacje/",
+    icon: FacebookIcon,
+  },
+  {
+    link: "https://x.com/SKOMUNIKACJA",
+    icon: XLogoIcon,
+  },
+  {
+    link: "https://www.linkedin.com/company/skomunikacja/posts/?feedView=all",
+    icon: LinkedinLogoIcon,
+  },
+];
 
 const Contact = () => {
   const {
@@ -124,54 +148,22 @@ const Contact = () => {
             <div className={"flex gap-6"}>
               <AtSymbolIcon className={"size-8"} />
               <div>
-                <p>
+                <p className={"flex gap-2"}>
                   <span>Biuro: </span>
-                  <a
-                    className={"text-gray-200"}
-                    href={"mailto:energia@pomiary.pl"}
-                  >
-                    energia@pomiary.pl
-                  </a>
+                  <AnimatedAElement email={"energia@pomiary.pl"} />
                 </p>
-                <p>
+                <p className={"flex gap-2"}>
                   <span>Konsultacje techniczne: </span>
-                  <a
-                    className={"text-gray-200"}
-                    href={"mailto:jacek.kozbial@live.com"}
-                  >
-                    jacek.kozbial@live.com
-                  </a>
+                  <AnimatedAElement email={"jacek.kozbial@live.com"} />
                 </p>
               </div>
             </div>
             <ul className={"mt-8 flex gap-3"}>
-              <li>
-                <button
-                  className={
-                    "bg-black-300 flex size-14 items-center justify-center rounded-full border-[2px]"
-                  }
-                >
-                  <FacebookIcon className={"fill-white-100 size-8"} />
-                </button>
-              </li>
-              <li>
-                <button
-                  className={
-                    "bg-black-300 flex size-14 items-center justify-center rounded-full border-[2px]"
-                  }
-                >
-                  <XLogoIcon className={"fill-white-100 size-8"} />
-                </button>
-              </li>
-              <li>
-                <button
-                  className={
-                    "bg-black-300 flex size-14 items-center justify-center rounded-full border-[2px]"
-                  }
-                >
-                  <LinkedinLogoIcon className={"fill-white-100 size-8"} />
-                </button>
-              </li>
+              {socialMediaIconsData.map((data: SocialMediaIconData, index) => (
+                <li key={index}>
+                  <AnimatedButtonWithIcon Icon={data.icon} link={data.link} />
+                </li>
+              ))}
             </ul>
           </div>
         </div>
