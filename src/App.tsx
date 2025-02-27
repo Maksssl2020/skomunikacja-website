@@ -8,6 +8,7 @@ import Offer from "./pages/Offer.tsx";
 import Products from "./pages/Products.tsx";
 import TipsAndTricks from "./pages/TipsAndTricks.tsx";
 import Shop from "./pages/Shop.tsx";
+import LoRaBitrateCalculator from "./pages/LoRaBitrateCalculator.tsx";
 
 function App() {
   return (
@@ -22,6 +23,10 @@ function App() {
           <Route path={"/tips-and-tricks"} element={<TipsAndTricks />} />
           <Route path={"/shop"} element={<Shop />} />
           <Route path={"/contact"} element={<Contact />} />
+          <Route
+            path={"/tips-and-tricks/lora-bitrate-calculator"}
+            element={<LoRaBitrateCalculator />}
+          />
         </Route>
       </Routes>
     </BrowserRouter>

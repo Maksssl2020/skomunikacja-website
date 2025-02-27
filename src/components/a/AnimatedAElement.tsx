@@ -2,10 +2,14 @@ import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
 type AnimatedAElementProps = {
-  email: string;
+  email?: string;
+  address?: string;
 };
 
-const AnimatedAElement = ({ email }: AnimatedAElementProps) => {
+const companyAddressCoordinatesLink =
+  "https://www.google.com/maps?q=52.51198033397085, 16.57680830016961";
+
+const AnimatedAElement = ({ email, address }: AnimatedAElementProps) => {
   const [isHovered, setIsHovered] = useState<boolean>(false);
   const [width, setWidth] = useState<number>(0);
   const aRef = useRef<HTMLAnchorElement | null>(null);
@@ -32,10 +36,11 @@ const AnimatedAElement = ({ email }: AnimatedAElementProps) => {
         }
         transition={{ duration: 0.2 }}
         className={"text-gray-200"}
-        href={`mailto:${email}`}
+        href={email ? `mailto:${email}` : companyAddressCoordinatesLink}
+        target="_blank"
         ref={aRef}
       >
-        {email}
+        {email ? email : address}
       </motion.a>
       <motion.p
         animate={isHovered ? { opacity: 1 } : { opacity: 0 }}

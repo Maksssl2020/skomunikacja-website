@@ -139,7 +139,7 @@ const Contact = () => {
           <div className={"flex flex-col gap-2"}>
             <div className={"flex gap-6"}>
               <LocationIcon className={"size-8"} />
-              <p className={"text-gray-200"}>ul. Parkowa 12, 64-530 Kaźmierz</p>
+              <AnimatedAElement address={"ul. Parkowa 12, 64-530 Kaźmierz"} />
             </div>
             <div className={"flex gap-6"}>
               <PhoneIcon className={"size-8"} />

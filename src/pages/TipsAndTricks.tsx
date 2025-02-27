@@ -25,6 +25,11 @@ const tipsAndTricksData: TipsAndTricksProps[] = [
       "Terminale F8L10T można skonfigurować do pracy w układzie z centralnym nadajnikiem LoRa. Po połączeniu nadajnika centralnego z routerem GSM uzyskujemy bramkę/gateway LoRaWAN dzięki czemu lokalna komórka LoRa może być obsługiwana za pomocą sieci GSM.",
     imagesUrl: ["/assets/TT-LoRaWAN-Tip-2.png"],
   },
+  {
+    title: "Kalkulator bitrate LoRa",
+    description: "",
+    imagesUrl: [],
+  },
 ];
 
 const TipsAndTricks = () => {
@@ -45,31 +50,33 @@ const TipsAndTricks = () => {
 
   return (
     <Page className={"relative flex justify-center"}>
-      <div className={"flex h-[750px] w-[1150px] flex-wrap gap-16"}>
-        {tipsAndTricksData.map((data, index) => (
-          <motion.div
-            whileHover={{ scale: 1.1 }}
-            onClick={() => {
-              setModalData(data);
-              setIsModalOpen(true);
-            }}
-            key={index}
-            className={
-              "border-white-100 flex h-[300px] w-[325px] cursor-pointer flex-col rounded-xl border-2"
-            }
-          >
-            <img
-              className={"h-full w-full rounded-t-lg object-cover"}
-              src={data.imagesUrl[0]}
-              alt={""}
-            />
-            <footer className={"text-white-100 mt-auto h-[75px] p-2"}>
-              {data.title}
-            </footer>
-          </motion.div>
-        ))}
+      <div className={"flex w-[1150px] flex-col items-center gap-16"}>
+        <h1 className={"text-white-100 text-5xl"}>Tips & Tricks</h1>
+        <div className={"flex h-[750px] w-[1150px] flex-wrap gap-16"}>
+          {tipsAndTricksData.map((data, index) => (
+            <motion.div
+              whileHover={{ scale: 1.1, borderColor: "#3382FF" }}
+              onClick={() => {
+                setModalData(data);
+                setIsModalOpen(true);
+              }}
+              key={index}
+              className={
+                "border-white-100 flex h-[300px] w-[325px] cursor-pointer flex-col rounded-xl border-2"
+              }
+            >
+              <img
+                className={"h-full w-full rounded-t-xl object-cover"}
+                src={data.imagesUrl[0]}
+                alt={""}
+              />
+              <footer className={"text-white-100 mt-auto h-[75px] p-2"}>
+                {data.title}
+              </footer>
+            </motion.div>
+          ))}
+        </div>
       </div>
-
       <AnimatePresence mode={"wait"}>
         {isModalOpen && (
           <Modal>

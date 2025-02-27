@@ -13,11 +13,31 @@
     --color-blue-200: #3382FF;
     --color-blue-300: #194BFD;
     --color-blue-400: #34A4DD;
+    --color-green-100: #0E7565;
+    --color-green-200: #AEE629;
+    --color-mint-100: #C6F4ED;
+    --color-yellow-100: #EBCB2C;
+    --color-orange-100: #E25225;
+    --color-red-100: #CB333E;
+    --color-turquoise-100: #1ABC9C
 }
 
 body, #root {
     min-height: 100vh;
     margin: 0;
+
+    &::-webkit-scrollbar {
+        width: 12px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        border-radius: 5px;
+        background-color: #3382FF;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        cursor: pointer;
+    }
 }
 
 .background-gradient {

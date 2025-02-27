@@ -1,0 +1,17 @@
+export const offerData: string[] = [
+  "Usługa wykonania mapy zasięgu LoRaWAN",
+  "Opracowanie koncepcji i projektów systemów komunikacji z użyciem technologi takich jak BPL, LoRaWAN, GSM …",
+  "Opracowanie koncepcji i projektów systemów pomiarowych energii elektrycznej typu AMR/AMI/Smart Metering",
+  "Urządzenia BPL (modemy, koncentratory, sprzęgacze niskiego i średniego napięcia) – szerokopasmowa komunikacja w sieciach energetycznych niskiego i średniego napięcia",
+  "Routery GSM 3G/LTE",
+  "Terminale GSM 2G/3G/LTE",
+  "Modemy LoRa 868MHz",
+  "Terminale NB IoT czyli tzw. wąskopasmowy LTE – komunikacja dla systemów IoT",
+  "Konwertery interfejsów RS485/232-WiFi-Ethernet, RS485-LoRa/LoRaWAN, RS485-BPL, Ethernet-BPL …",
+  "Głowice optyczne USB oraz Bluetooth do odczytu liczników energii elektrycznej",
+  "Oprogramowanie do odczytu danych pomiarowych z liczników energii elektrycznej",
+  "WMBUS-BPL Gateway do akwizycji danych pomiarowych z urządzeń z interfejsem WMBUS",
+  "Liczniki, analizatory i rejestratory  energii elektrycznej",
+  "Liczniki innych mediów: woda, ciepło, gaz ( z interfejsem WMBUS, LoRaWAN)",
+  "Sensory i gateways LoRaWAN",
+];
