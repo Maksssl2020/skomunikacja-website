@@ -28,7 +28,7 @@ const tipsAndTricksData: TipsAndTricksProps[] = [
   {
     title: "Kalkulator bitrate LoRa",
     description: "",
-    imagesUrl: [],
+    imagesUrl: ["/assets/LoRaBitrateCalculator.png"],
   },
 ];
 
