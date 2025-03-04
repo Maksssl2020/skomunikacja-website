@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import AnimatedChevronIcon from "../../icons/AnimatedChevronIcon.tsx";
 import { FieldValues, UseFormSetValue } from "react-hook-form";
 
@@ -27,11 +27,34 @@ const Select = <T extends FieldValues>({
 }: SelectProps<T>) => {
   const [selectedOption, setSelectedOption] = useState<string>(dropdownData[0]);
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
+  const selectRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        selectRef.current &&
+        !selectRef.current.contains(event.target as Node)
+      ) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    if (isDropdownOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isDropdownOpen]);
 
   return (
     <motion.div
       whileHover={{ borderColor: "#3382FF" }}
       style={{ borderColor: "#E6E6E6" }}
+      ref={selectRef}
       onClick={() => setIsDropdownOpen(!isDropdownOpen)}
       className={
         "relative flex h-[50px] w-[150px] cursor-pointer flex-col rounded-lg border-2"

@@ -44,3 +44,10 @@ body, #root {
     background: linear-gradient(90deg, #194BFD, #AD13FB);
 }
 
+.animated-text-gradient {
+    background: linear-gradient(90deg, #E6E6E6 , #3382FF , #1559CB );
+    background-size: 200%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
