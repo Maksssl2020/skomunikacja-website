@@ -5,6 +5,7 @@ import { AnimatePresence } from "framer-motion";
 import CloseIcon from "./CloseIcon.tsx";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import TipsAndTricksCard from "../components/card/TipsAndTricksCard.tsx";
 
 type TipsAndTricksProps = {
   title: string;
@@ -52,6 +53,10 @@ const TipsAndTricks = () => {
   const [textAreaHeight, setTextAreaHeight] = useState<number>(0);
   const navigate = useNavigate();
   const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
+  const groupedData: TipsAndTricksProps[][] = [[], [], []];
+  tipsAndTricksData.forEach((data, index) => {
+    groupedData[index % 3].push(data);
+  });
 
   useEffect(() => {
     if (textAreaRef.current) {
@@ -63,29 +68,49 @@ const TipsAndTricks = () => {
     <Page className={"relative flex justify-center"}>
       <div className={"flex w-[1150px] flex-col items-center gap-16"}>
         <h1 className={"text-white-100 text-5xl"}>Tips & Tricks</h1>
-        <div className={"flex h-[750px] w-[1150px] flex-wrap gap-16"}>
-          {tipsAndTricksData.map((data, index) => (
-            <motion.div
-              whileHover={{ scale: 1.1, borderColor: "#3382FF" }}
-              onClick={() => {
-                setModalData(data);
-                setIsModalOpen(true);
-              }}
-              key={index}
-              className={
-                "border-white-100 flex h-[300px] w-[325px] cursor-pointer flex-col rounded-xl border-2"
-              }
+        <div className={"grid h-auto w-full grid-cols-3 gap-4"}>
+          {groupedData.map((column, columnIndex) => (
+            <div
+              key={columnIndex}
+              className={"flex h-auto w-full flex-col gap-4"}
             >
-              <img
-                className={"h-full w-full rounded-t-xl object-cover"}
-                src={data.imagesUrl[0]}
-                alt={""}
-              />
-              <footer className={"text-white-100 mt-auto h-[75px] p-2"}>
-                {data.title}
-              </footer>
-            </motion.div>
+              {column.map((data, index) => (
+                <TipsAndTricksCard
+                  index={index}
+                  title={data.title}
+                  imageUrl={data.imagesUrl[0]}
+                  imageAlt={data.title}
+                  onClick={() => {
+                    setModalData(data);
+                    setIsModalOpen(true);
+                  }}
+                />
+              ))}
+            </div>
           ))}
+
+          {/*{tipsAndTricksData.map((data, index) => (*/}
+          {/*  <motion.div*/}
+          {/*    whileHover={{ scale: 1.1, borderColor: "#3382FF" }}*/}
+          {/*    onClick={() => {*/}
+          {/*      setModalData(data);*/}
+          {/*      setIsModalOpen(true);*/}
+          {/*    }}*/}
+          {/*    key={index}*/}
+          {/*    className={*/}
+          {/*      "border-white-100 flex h-[300px] w-[325px] cursor-pointer flex-col rounded-xl border-2"*/}
+          {/*    }*/}
+          {/*  >*/}
+          {/*    <img*/}
+          {/*      className={"h-full w-full rounded-t-xl object-cover"}*/}
+          {/*      src={data.imagesUrl[0]}*/}
+          {/*      alt={""}*/}
+          {/*    />*/}
+          {/*    <footer className={"text-white-100 mt-auto h-[75px] p-2"}>*/}
+          {/*      {data.title}*/}
+          {/*    </footer>*/}
+          {/*  </motion.div>*/}
+          {/*))}*/}
         </div>
       </div>
       <AnimatePresence mode={"wait"}>

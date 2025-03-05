@@ -22,7 +22,7 @@ const bandwidthData: string[] = [
 ];
 
 const codeRateData: string[] = ["4/5", "4/6", "4/7", "4/8"];
-
+const bateryCapacityData: string[] = ["1200", "2600", "3600", "9000"];
 type configurationCardProps = {
   title: string;
   bgColor: string;
@@ -74,7 +74,8 @@ type loRaModemSettingsDataProps = {
     | "spreadingFactor"
     | "bandwidth"
     | "codeRate"
-    | "lowDatarateOptimize";
+    | "lowDatarateOptimize"
+    | "batteryCapacity";
   componentType: "select" | "enableDisable";
 };
 
@@ -102,6 +103,12 @@ const loRaModemSettingsData: loRaModemSettingsDataProps[] = [
     dropdownData: null,
     dataName: "lowDatarateOptimize",
     componentType: "enableDisable",
+  },
+  {
+    title: "Battery capacity (mAh)",
+    dropdownData: bateryCapacityData,
+    dataName: "batteryCapacity",
+    componentType: "select",
   },
 ];
 
@@ -226,6 +233,10 @@ const LoRaPerformanceCalculator = () => {
       noiseFigure: 4,
       transmitPower: 1,
       crystalTolerance: 10,
+      batteryCapacity: "1200",
+      hours: 0,
+      minutes: 0,
+      seconds: 0,
     },
   });
 
@@ -293,6 +304,8 @@ const LoRaPerformanceCalculator = () => {
   const noiseFigure = watch("noiseFigure");
   const transmitPower = watch("transmitPower");
   const crystalTolerance = watch("crystalTolerance");
+  const batteryCapacity = watch("batteryCapacity");
+  console.log(batteryCapacity);
 
   const codeRateValue = () => {
     const codeRate = watch("codeRate");
@@ -430,6 +443,37 @@ const LoRaPerformanceCalculator = () => {
                   />
                 </div>
               ))}
+            </div>
+          </div>
+          <div className={"flex h-auto w-full items-center"}>
+            <label className={"w-[200px] text-xl"}>Periodicity (h:m:s)</label>
+            <div className={"flex h-auto w-auto items-center gap-2"}>
+              <CalculatorInput
+                min={0}
+                max={24}
+                defaultValue={0}
+                numberIncrementDecrementValue={1}
+                setValue={setValue}
+                name={"hours"}
+              />
+              <label className={"text-xl font-bold"}>:</label>
+              <CalculatorInput
+                min={0}
+                max={60}
+                defaultValue={0}
+                numberIncrementDecrementValue={1}
+                setValue={setValue}
+                name={"minutes"}
+              />
+              <label className={"text-xl font-bold"}>:</label>
+              <CalculatorInput
+                min={0}
+                max={60}
+                defaultValue={0}
+                numberIncrementDecrementValue={1}
+                setValue={setValue}
+                name={"seconds"}
+              />
             </div>
           </div>
           <div
