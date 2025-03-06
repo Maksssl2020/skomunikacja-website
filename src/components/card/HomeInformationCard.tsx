@@ -20,6 +20,7 @@ const HomeInformationCard = ({
 }: HomeInformationCardProps) => {
   return (
     <motion.div
+      whileHover={{ scale: 1.05, borderColor: "#3382FF" }}
       variants={{
         visible: {
           opacity: 1,

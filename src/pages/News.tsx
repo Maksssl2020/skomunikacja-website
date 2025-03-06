@@ -1,5 +1,8 @@
 import Page from "../animations/Page.tsx";
 import NewsInformationCard from "../components/card/NewsInformationCard.tsx";
+import { useState } from "react";
+import { motion } from "framer-motion";
+import Searchbar from "../components/input/Searchbar.tsx";
 
 type NewsDataProps = {
   title: string;
@@ -44,7 +47,35 @@ const newsData: NewsDataProps[] = [
   },
 ];
 
+type OptionProps = {
+  title: string;
+  value: string;
+};
+
+const optionsData: OptionProps[] = [
+  {
+    title: "Ostatnie",
+    value: "recent",
+  },
+  {
+    title: "Losowe",
+    value: "random",
+  },
+  {
+    title: "Kategorie",
+    value: "categories",
+  },
+  {
+    title: "Popularne",
+    value: "popular",
+  },
+];
+
 const News = () => {
+  const [selectedOption, setSelectedOption] = useState<OptionProps>(
+    optionsData[0],
+  );
+
   const groupedData: NewsDataProps[][] = [[], [], []];
   newsData.forEach((data, index) => {
     groupedData[index % 3].push(data);
@@ -54,6 +85,34 @@ const News = () => {
     <Page className={"flex justify-center"}>
       <div className={"flex w-[1150px] flex-col items-center gap-16"}>
         <h1 className={"text-white-100 text-5xl"}>Nowości</h1>
+        <div
+          className={
+            "flex h-[75px] w-full gap-2 border-y-2 border-gray-300 p-2"
+          }
+        >
+          {optionsData.map((option, index) => (
+            <motion.button
+              animate={
+                selectedOption.value === option.value
+                  ? { color: "#3382FF" }
+                  : { color: "#E6E6E6" }
+              }
+              key={index}
+              value={option.value}
+              onClick={() => setSelectedOption(option)}
+              className={
+                "text-white-100 h-full w-auto cursor-pointer px-4 text-lg uppercase"
+              }
+            >
+              {option.title}
+            </motion.button>
+          ))}
+          <label className={"text-white-100 flex h-full items-center text-lg"}>
+            <span className={"uppercase"}>Ilość publikacji</span>:{" "}
+            {`${newsData.length}`}
+          </label>
+          <Searchbar />
+        </div>
         <div className={"grid h-auto w-full grid-cols-3 gap-4"}>
           {groupedData.map((column, columnIndex) => (
             <div

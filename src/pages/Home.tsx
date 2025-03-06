@@ -149,7 +149,16 @@ const Home = () => {
   return (
     <Page className={"flex justify-center"}>
       <div className={"flex w-[1150px] flex-col items-center gap-16"}>
-        <div className={"relative flex h-[400px] w-full"}>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 1 }}
+          transition={{
+            duration: 0.5,
+            ease: "easeInOut",
+          }}
+          className={"relative flex h-[400px] w-full"}
+        >
           <div
             className={
               "absolute top-0 left-0 -z-10 flex h-full w-full rounded-xl"
@@ -207,9 +216,9 @@ const Home = () => {
               content={"Dowiedz Się Więcej"}
             />
           </div>
-        </div>
+        </motion.div>
         <div className={"grid h-auto w-full grid-cols-3 gap-4 text-white"}>
-          <AnimatePresence mode={"wait"}>
+          <AnimatePresence>
             {groupedData.map((column, colIndex) => (
               <motion.div
                 variants={{

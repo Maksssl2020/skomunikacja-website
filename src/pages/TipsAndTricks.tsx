@@ -76,6 +76,7 @@ const TipsAndTricks = () => {
             >
               {column.map((data, index) => (
                 <TipsAndTricksCard
+                  key={index}
                   index={index}
                   title={data.title}
                   imageUrl={data.imagesUrl[0]}

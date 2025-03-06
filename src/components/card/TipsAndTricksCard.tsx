@@ -20,6 +20,7 @@ const TipsAndTricksCard = ({
 
   return (
     <motion.div
+      key={index}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       animate={
@@ -28,7 +29,6 @@ const TipsAndTricksCard = ({
           : { scale: 1.0, borderColor: "#B0B0B0" }
       }
       onClick={onClick}
-      key={index}
       className={
         "bg-black-300 flex h-auto w-full cursor-pointer flex-col rounded-xl border-2 border-gray-100"
       }

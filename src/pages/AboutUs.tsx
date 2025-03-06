@@ -16,9 +16,8 @@ const AboutUs = () => {
               className={
                 "text-white-100 h-full w-full resize-none text-xl outline-none"
               }
-            >
-              {aboutUsDescription}
-            </textarea>
+              defaultValue={aboutUsDescription}
+            />
           </div>
 
           <div

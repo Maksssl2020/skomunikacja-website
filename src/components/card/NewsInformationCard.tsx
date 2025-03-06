@@ -21,8 +21,9 @@ const NewsInformationCard = ({
 }: NewsInformationCardProps) => {
   return (
     <motion.div
+      whileHover={{ scale: 1.05, borderColor: "#3382FF" }}
       className={
-        "text-white-100 bg-black-300 h-auto w-full rounded-xl border-2 border-gray-300"
+        "text-white-100 bg-black-300 h-auto w-full cursor-pointer rounded-xl border-2 border-gray-300"
       }
     >
       <img
