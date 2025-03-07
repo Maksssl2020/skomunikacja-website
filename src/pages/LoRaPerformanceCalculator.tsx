@@ -233,7 +233,7 @@ const LoRaPerformanceCalculator = () => {
       noiseFigure: 4,
       transmitPower: 1,
       crystalTolerance: 10,
-      batteryCapacity: "1200",
+      batteryCapacity: 1200,
       hours: 0,
       minutes: 0,
       seconds: 0,
@@ -305,7 +305,10 @@ const LoRaPerformanceCalculator = () => {
   const transmitPower = watch("transmitPower");
   const crystalTolerance = watch("crystalTolerance");
   const batteryCapacity = watch("batteryCapacity");
-  console.log(batteryCapacity);
+  const hours = watch("hours");
+  const minutes = watch("minutes");
+  const seconds = watch("seconds");
+  const periodicity = `${hours}:${minutes}:${seconds}`;
 
   const codeRateValue = () => {
     const codeRate = watch("codeRate");
@@ -328,6 +331,8 @@ const LoRaPerformanceCalculator = () => {
       noiseFigure,
       transmitPower,
       crystalTolerance,
+      batteryCapacity,
+      periodicity,
     });
 
     setCalculatedResults(results);
@@ -343,6 +348,8 @@ const LoRaPerformanceCalculator = () => {
     noiseFigure,
     transmitPower,
     crystalTolerance,
+    batteryCapacity,
+    periodicity,
   ]);
 
   return (

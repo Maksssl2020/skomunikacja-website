@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
 import { ProductCardProps } from "../../types/types.ts";
+import { useNavigate } from "react-router-dom";
+import { formatTextIntoLink } from "../../utils/formatTextIntoLink.ts";
 
 const ProductCard = ({
   index,
@@ -9,6 +11,9 @@ const ProductCard = ({
   imageHeight,
   textColor,
 }: ProductCardProps) => {
+  const navigate = useNavigate();
+  const formattedTitleForUrl = formatTextIntoLink(title);
+
   return (
     <motion.div
       key={index}
@@ -32,6 +37,7 @@ const ProductCard = ({
         {title}
       </p>
       <motion.button
+        onClick={() => navigate(`/products/${formattedTitleForUrl}`)}
         whileHover={{ background: "#171719", color: "#E6E6E6" }}
         style={{ background: "#C6F4ED", color: "#171719" }}
         className={"h-[65px] w-[175px] cursor-pointer rounded-sm text-lg"}

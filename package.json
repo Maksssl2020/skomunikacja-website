@@ -12,6 +12,7 @@
   "dependencies": {
     "@hookform/resolvers": "^4.1.2",
     "@tailwindcss/vite": "^4.0.8",
+    "@tinymce/tinymce-react": "^6.0.0",
     "framer-motion": "^12.4.7",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

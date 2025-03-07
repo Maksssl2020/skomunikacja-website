@@ -9,6 +9,9 @@ import Products from "./pages/Products.tsx";
 import TipsAndTricks from "./pages/TipsAndTricks.tsx";
 import Shop from "./pages/Shop.tsx";
 import LoRaPerformanceCalculator from "./pages/LoRaPerformanceCalculator.tsx";
+import Article from "./pages/Article.tsx";
+import ArticleForm from "./pages/ArticleForm.tsx";
+import Product from "./pages/Product.tsx";
 
 function App() {
   return (
@@ -27,6 +30,9 @@ function App() {
             path={"/tips-and-tricks/lora-performance-calculator"}
             element={<LoRaPerformanceCalculator />}
           />
+          <Route path={"/products/:productName"} element={<Product />} />
+          <Route path={"/news/:articleTitle"} element={<Article />} />
+          <Route path={"/admin/create-article"} element={<ArticleForm />} />
         </Route>
       </Routes>
     </BrowserRouter>

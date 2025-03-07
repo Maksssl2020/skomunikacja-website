@@ -1,3 +1,5 @@
+import { s } from "framer-motion/dist/types.d-6pKw1mTI";
+
 type LoRaPerformanceCalculationParams = {
   spreadingFactor: number;
   bandwidth: number;
@@ -10,6 +12,8 @@ type LoRaPerformanceCalculationParams = {
   noiseFigure: number;
   transmitPower: number;
   crystalTolerance: number;
+  batteryCapacity: number;
+  periodicity: string;
 };
 
 type LoRaPerformanceCalculationResultParams = {
@@ -36,19 +40,25 @@ export const LoRaPerformanceCalculation = (
     noiseFigure,
     transmitPower,
     crystalTolerance,
+    batteryCapacity,
+    periodicity,
   } = data;
+
+  const periodicityParts = periodicity.split(":");
+  const periodicityTotalSeconds =
+    parseInt(periodicityParts[0]) * 3600 +
+    parseInt(periodicityParts[1]) * 60 +
+    parseInt(periodicityParts[2]);
 
   const symbolTime = parseFloat(
     (Math.pow(2, spreadingFactor) / bandwidth).toFixed(3),
   );
-
   const bitrate = (bandwidth * 1000) / Math.pow(2, spreadingFactor);
   const crystalToleranceError =
     crystalTolerance * Math.pow(10, -6) * 868 * Math.pow(10, 6);
   const maxFrequencyError = (bitrate + crystalToleranceError) / 1000;
 
   const tPreamble = parseFloat((preambleLength * symbolTime).toFixed(3));
-
   let payloadBit = 8 * payloadLength;
   payloadBit -= 4 * spreadingFactor;
   payloadBit += 8;
@@ -63,6 +73,7 @@ export const LoRaPerformanceCalculation = (
 
   const tPayload = parseFloat((nPayload * symbolTime).toFixed(3));
   const tTotal = parseFloat((tPreamble + tPayload).toFixed(3));
+  const tTotalSeconds = tTotal / 1000;
   const receiverSensitivity =
     -174 +
     10 * Math.log10(bandwidth * 1000) +
@@ -70,6 +81,17 @@ export const LoRaPerformanceCalculation = (
     getSnrBasedOnSf(spreadingFactor);
 
   const linkBudget = transmitPower + receiverSensitivity;
+
+  const currentTransmission_mA = 120;
+  const currentReceive_mA = 12;
+  const currentSleep_mA = 0.01;
+  const avgCurrent =
+    ((currentTransmission_mA + currentReceive_mA) * tTotal +
+      currentSleep_mA * (periodicityTotalSeconds - tTotalSeconds)) /
+    periodicityTotalSeconds;
+
+  const batteryLife = batteryCapacity / avgCurrent;
+  console.log(batteryLife / 24);
 
   return {
     symbolTime: symbolTime,
