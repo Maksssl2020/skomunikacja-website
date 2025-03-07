@@ -22,7 +22,14 @@ const bandwidthData: string[] = [
 ];
 
 const codeRateData: string[] = ["4/5", "4/6", "4/7", "4/8"];
-const bateryCapacityData: string[] = ["1200", "2600", "3600", "9000"];
+const bateryCapacityData: string[] = [
+  "500",
+  "800",
+  "1200",
+  "2600",
+  "3600",
+  "9000",
+];
 type configurationCardProps = {
   title: string;
   bgColor: string;
@@ -211,6 +218,10 @@ type calculatedResultType = {
   totalLength: number;
   receiverSensitivity: number;
   linkBudget: number;
+  batteryLifeHours: number;
+  batteryLifeDays: number;
+  batteryLifeYears: number;
+  totalPacketsSent: number;
 };
 
 type calculatedResultsCardsProps = {
@@ -248,9 +259,13 @@ const LoRaPerformanceCalculator = () => {
       totalLength: 0,
       receiverSensitivity: 0,
       linkBudget: 0,
+      batteryLifeHours: 0,
+      batteryLifeDays: 0,
+      batteryLifeYears: 0,
+      totalPacketsSent: 0,
     });
 
-  const calculatedResultsLeftCardsData: calculatedResultsCardsProps[] = [
+  const calculatedTimePerformanceData: calculatedResultsCardsProps[] = [
     {
       title: "Całkowita długość",
       unit: "Sybmols",
@@ -268,7 +283,7 @@ const LoRaPerformanceCalculator = () => {
     },
   ];
 
-  const calculatedResultsRightCardsData: calculatedResultsCardsProps[] = [
+  const calculatedRfPerformanceData: calculatedResultsCardsProps[] = [
     {
       title: "Budżet linku",
       unit: "dBm",
@@ -283,6 +298,29 @@ const LoRaPerformanceCalculator = () => {
       title: "Max. błąd częstotliwości",
       unit: "kHz",
       result: calculatedResults.maximumFrequencyError,
+    },
+  ];
+
+  const calculatedBatteryPerformanceData: calculatedResultsCardsProps[] = [
+    {
+      title: "Czas życia baterii",
+      unit: "godz",
+      result: calculatedResults.batteryLifeHours,
+    },
+    {
+      title: "Czas życia baterii",
+      unit: "dni",
+      result: calculatedResults.batteryLifeDays,
+    },
+    {
+      title: "Czas życia baterii",
+      unit: "lata",
+      result: calculatedResults.batteryLifeYears,
+    },
+    {
+      title: "Ilość pakietów",
+      unit: "",
+      result: calculatedResults.totalPacketsSent,
     },
   ];
 
@@ -518,29 +556,57 @@ const LoRaPerformanceCalculator = () => {
             </div>
           </div>
           <div
-            className={"flex flex-col gap-8 border-t-2 border-blue-200 pt-6"}
+            className={
+              "flex w-full flex-col items-center gap-8 border-t-2 border-blue-200 pt-6"
+            }
           >
-            <label className={"text-xl font-bold"}>Rezultat obliczeń</label>
+            <label className={"mr-auto text-xl font-bold"}>
+              Rezultat obliczeń
+            </label>
             <div
               className={
-                "flex h-auto w-full items-center justify-center gap-16"
+                "flex h-auto w-[80%] flex-col items-center justify-center gap-16"
               }
             >
-              <div className={"flex h-auto w-auto flex-col gap-8"}>
-                <label className={"text-xl font-bold"}>Wydajność czasowa</label>
-                {calculatedResultsLeftCardsData.map((data, index) => (
-                  <CalculationResultCard
-                    key={index}
-                    className={"flex w-[385px] items-center justify-between"}
-                    title={data.title}
-                    result={`${data.result}`}
-                    unit={data.unit}
-                  />
-                ))}
+              <div
+                className={
+                  "flex h-auto w-full items-center justify-between gap-24"
+                }
+              >
+                <div className={"flex h-auto w-auto flex-col gap-8"}>
+                  <label className={"text-xl font-bold"}>
+                    Wydajność czasowa
+                  </label>
+                  {calculatedTimePerformanceData.map((data, index) => (
+                    <CalculationResultCard
+                      key={index}
+                      className={"flex w-[385px] items-center justify-between"}
+                      title={data.title}
+                      result={`${data.result}`}
+                      unit={data.unit}
+                    />
+                  ))}
+                </div>
+                <div className={"flex h-auto w-auto flex-col gap-8"}>
+                  <label className={"text-xl font-bold"}>Wydajność RF</label>
+                  {calculatedRfPerformanceData.map((data, index) => (
+                    <CalculationResultCard
+                      key={index}
+                      className={"flex w-[385px] items-center justify-between"}
+                      title={data.title}
+                      result={`${data.result}`}
+                      unit={data.unit}
+                    />
+                  ))}
+                </div>
               </div>
-              <div className={"flex h-auto w-auto flex-col gap-8"}>
-                <label className={"text-xl font-bold"}>Wydajność RF</label>
-                {calculatedResultsRightCardsData.map((data, index) => (
+              <div
+                className={"flex h-auto w-full flex-col justify-center gap-8"}
+              >
+                <label className={"text-xl font-bold"}>
+                  Wydajność Bateryjna
+                </label>
+                {calculatedBatteryPerformanceData.map((data, index) => (
                   <CalculationResultCard
                     key={index}
                     className={"flex w-[385px] items-center justify-between"}
